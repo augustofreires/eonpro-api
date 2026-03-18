@@ -1,0 +1,23 @@
+node_modules/
+# Keep environment variables out of version control
+.env
+.env.*
+
+/src/generated/prisma
+
+# Build output
+dist/
+
+# Logs
+*.log
+logs/
+
+# Uploads (user files)
+uploads/
+
+# Projects separados que existem no VPS mas não pertencem a este repo
+dbot3/
+iaeon-api3/
+
+# OS
+.DS_Store
