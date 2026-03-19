@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict r7F3IXGD6oHNhBabogKHgzrpIsGa1PdcYFt8rZBp3EV5fzBgg8QGv1jsSNkHybC
+\restrict gmeQheKaAaxMnkMHYT8Qpim6aUVzWNrNc9Ga2plc4itvZMnL8idkCC2YDekdpxV
 
 -- Dumped from database version 16.13 (Ubuntu 16.13-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.13 (Ubuntu 16.13-0ubuntu0.24.04.1)
@@ -278,9 +278,6 @@ e59429dc-ad23-4cb7-9c1a-c8b41eecab0c	Stoch And RSI Bot	Bot de trading baseado em
 8a8b87a9-b872-4d2f-b5a7-d4d22a962861	Moneybot	Bot de Reset Call no Volatility Index 100 com análise de padrões de dígitos pares/ímpares. Martingale configurável com fator e nível de início.	Moneybot.xml	PAID	ACTIVE	2026-02-17 16:44:14.733	2026-02-17 16:44:14.733	moneybot
 be6efbce-c027-4843-bcdc-68fa77babfef	Fabrica Invert	Bot avançado com 10 estratégias invertidas Over/Under no Volatility Index 10. Análise estatística de dígitos, martingale inteligente, soros, stop loss e meta de ganho.	Fabrica Invert.xml	PAID	INACTIVE	2026-02-17 16:22:14.543	2026-02-17 21:09:10.205	fabrica_invert
 92ae4a83-8f71-4262-98b0-cce40b5933c1	Exponential Strategy Bot 2.0	Estratégia exponencial com controle de lucro e perda	Exponential Strategy Bot 2.0.xml	PAID	ACTIVE	2026-02-24 21:31:06.726	2026-02-24 21:31:06.726	exponential_strategy
-7b77f6ca-c7da-4234-a77f-f4e5663ff7f4	Shark Digits Bot	Bot agressivo para operações de dígitos	Shark_Digits.xml	PAID	ACTIVE	2026-02-24 21:31:06.772	2026-02-24 21:31:06.772	shark_digits
-c3accd2c-f1ff-45b7-8ea8-3d45b00711dc	Entry Touch B-Bot	Bot para operações Touch/No Touch com sinal de entrada	Entry_Touch_BBot.xml	PAID	ACTIVE	2026-02-24 21:31:06.783	2026-02-24 21:31:06.783	entry_touch
-a1558c16-a395-4f45-932c-2db715793809	Insync Equals BinaryBot	Bot sincronizado para operações de igualdade	Insync_Equals BinaryBot.xml	PAID	ACTIVE	2026-02-24 21:31:06.791	2026-02-24 21:31:06.791	insync_equals
 aee57e3f-94b2-4852-b28b-3fd65a91b844	Leo Even Odd Bot	Bot para operações Par/Ímpar com martingale	Leo_Even_Odd.xml	PAID	ACTIVE	2026-02-24 21:31:06.799	2026-02-24 21:31:06.799	leo_even_odd
 0eb1f533-55db-4bff-9514-95dae33f05e2	D Alembert Max Stake	D Alembert com stake máximo configurável	dalembert_max-stake.xml	FREE	ACTIVE	2026-02-24 21:31:06.997	2026-02-24 21:31:06.997	dalembert_max_stake
 07d172dd-0f8e-4eac-a956-fe54d5e405f1	Martingale Max Stake	Martingale com stake máximo configurável	martingale_max-stake.xml	FREE	ACTIVE	2026-02-24 21:31:07.017	2026-02-24 21:31:07.017	martingale_max_stake
@@ -347,9 +344,6 @@ e890d81d-186d-4b26-969b-4f66a36fd094	01ef6e4b-c374-4303-928f-f12d48fb6f14	c44f93
 58753248-c3b0-45b4-9bc4-1ed5c22aeed4	01ef6e4b-c374-4303-928f-f12d48fb6f14	0cf11b7d-7ee5-4d3e-a7ab-562b87ea9097
 a1c2ae22-d48f-4c71-9eff-43fd63f50c68	01ef6e4b-c374-4303-928f-f12d48fb6f14	77b438b0-d4c3-43ba-9ed4-2c167e293965
 877be454-4967-4d03-ac8f-672bf92a0a76	01ef6e4b-c374-4303-928f-f12d48fb6f14	92ae4a83-8f71-4262-98b0-cce40b5933c1
-ee9140b1-fa8f-4ae8-93cb-47f41e2fdcb5	01ef6e4b-c374-4303-928f-f12d48fb6f14	7b77f6ca-c7da-4234-a77f-f4e5663ff7f4
-703d5103-d53d-49be-afb5-0e59ca8b50eb	01ef6e4b-c374-4303-928f-f12d48fb6f14	c3accd2c-f1ff-45b7-8ea8-3d45b00711dc
-ccad0e0d-9ca9-4309-8757-e24b5f261717	01ef6e4b-c374-4303-928f-f12d48fb6f14	a1558c16-a395-4f45-932c-2db715793809
 a649aef2-505f-49bb-b6a7-72f7f4c29059	01ef6e4b-c374-4303-928f-f12d48fb6f14	aee57e3f-94b2-4852-b28b-3fd65a91b844
 81cbbf11-ac09-4c70-9bf5-02e64e78a51b	8a2564f8-4ab8-4eed-9852-618abdfbe11d	0eb1f533-55db-4bff-9514-95dae33f05e2
 d1ca63dd-f6ba-4fa9-95d4-4808bfeb8e24	01ef6e4b-c374-4303-928f-f12d48fb6f14	0eb1f533-55db-4bff-9514-95dae33f05e2
@@ -560,5 +554,5 @@ ALTER TABLE ONLY public."Subscription"
 -- PostgreSQL database dump complete
 --
 
-\unrestrict r7F3IXGD6oHNhBabogKHgzrpIsGa1PdcYFt8rZBp3EV5fzBgg8QGv1jsSNkHybC
+\unrestrict gmeQheKaAaxMnkMHYT8Qpim6aUVzWNrNc9Ga2plc4itvZMnL8idkCC2YDekdpxV
 
