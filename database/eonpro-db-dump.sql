@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict gmeQheKaAaxMnkMHYT8Qpim6aUVzWNrNc9Ga2plc4itvZMnL8idkCC2YDekdpxV
+\restrict QJmX2Q3iNDmLygWVsIAL6jkgJxhDYd6cRbRFfVuMSK7p5BMlihKbw1xBO3YnZNv
 
 -- Dumped from database version 16.13 (Ubuntu 16.13-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 16.13 (Ubuntu 16.13-0ubuntu0.24.04.1)
@@ -111,6 +111,22 @@ CREATE TABLE public."Bot" (
 
 
 --
+-- Name: Course; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public."Course" (
+    id text NOT NULL,
+    title text NOT NULL,
+    description text,
+    thumbnail text,
+    "order" integer DEFAULT 0 NOT NULL,
+    status public."Status" DEFAULT 'ACTIVE'::public."Status" NOT NULL,
+    created_at timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(3) without time zone NOT NULL
+);
+
+
+--
 -- Name: CourseLesson; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -139,7 +155,8 @@ CREATE TABLE public."CourseModule" (
     "order" integer DEFAULT 0 NOT NULL,
     status public."Status" DEFAULT 'ACTIVE'::public."Status" NOT NULL,
     created_at timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp(3) without time zone NOT NULL
+    updated_at timestamp(3) without time zone NOT NULL,
+    course_id text
 );
 
 
@@ -264,19 +281,15 @@ CREATE TABLE public."WebhookLog" (
 COPY public."Bot" (id, name, description, xml_filename, category, status, created_at, updated_at, internal_id) FROM stdin;
 f27df3a4-7074-4820-883c-d494724efaf8	Eon Even/Odd	Digit Even com Martingale - R_100	eon_even_odd.xml	PAID	ACTIVE	2026-02-26 15:55:40.517	2026-02-26 15:55:40.517	\N
 47eec876-5aa2-4368-897a-a97d64565986	Eon Rise/Fall	Rise (Call) com Martingale - R_100	eon_rise_fall.xml	PAID	ACTIVE	2026-02-26 15:55:40.524	2026-02-26 15:55:40.524	\N
-0cf11b7d-7ee5-4d3e-a7ab-562b87ea9097	Digit Over 3	Bot de trading baseado em Digit Over 3	Digit Over 3.xml	PAID	ACTIVE	2026-02-08 20:16:05.861	2026-02-08 20:16:05.861	digit_over_3
 b250d063-0df5-4a59-98a4-04add4fda117	House Of Rise Fall Auto Bots	Bot de trading baseado em House Of Rise Fall Auto Bots	House of Rise_Fall Auto_Bots.xml	PAID	ACTIVE	2026-02-08 20:16:07.999	2026-02-08 20:16:07.999	house_rise_fall
 2dd5c9eb-ca9a-4d4c-8a75-34ce111a59e8	Lastdigit1 Strategy Bot	Bot de trading baseado em Lastdigit1 Strategy Bot	LastDigit1-Strategy-Bot.xml	PAID	ACTIVE	2026-02-08 20:16:08.535	2026-02-08 20:16:08.535	lastdigit1
 f4884da9-89fe-49b8-8d0d-90807722ca1c	Mavic Air RF Vix Bot	Bot de trading baseado em Mavic Air RF Vix Bot	Mavic-Air-RF Vix Bot.xml	PAID	ACTIVE	2026-02-08 20:16:09.082	2026-02-08 20:16:09.082	mavic_air_rf
 65e0a8bb-4091-4556-825c-a90aed859e02	RF Market Monitor	Bot de trading baseado em RF Market Monitor	RF_Market-Monitor.xml	PAID	ACTIVE	2026-02-08 20:16:10.176	2026-02-08 20:16:10.176	rf_market_monitor
 c44f9311-7ef0-4ac6-9e99-e2592d7e1a6e	HARAMI Binary Bot	Bot de trading baseado em HARAMI Binary Bot	HARAMI Binary-Bot.xml	PAID	ACTIVE	2026-02-08 20:16:06.938	2026-02-08 20:16:06.938	harami
-e59429dc-ad23-4cb7-9c1a-c8b41eecab0c	Stoch And RSI Bot	Bot de trading baseado em Stoch And RSI Bot	Stoch and RSI Bot.xml	PAID	ACTIVE	2026-02-08 20:16:11.5	2026-02-08 20:16:11.5	stoch_rsi
 1942ef29-fdf0-41d3-baf9-b3c2af780dab	Fast Par	Bot rápido de Digit Even (Par) com martingale no Volatility Index 100. Valor de entrada e multiplicador configuráveis.	Fast Par.xml	PAID	ACTIVE	2026-02-17 15:09:31.579	2026-02-17 15:09:31.579	fast_par
 3b47b5c7-6f26-4148-ac06-2e31db5050a4	Fabrica 7x2	Bot com estratégia 7x2 Over/Under no Volatility Index 10. Análise estatística, martingale, soros e sistema de garantia percentual.	Fabrica 7x2.xml	PAID	ACTIVE	2026-02-17 16:35:48.909	2026-02-17 16:35:48.909	fabrica_7x2
 77b438b0-d4c3-43ba-9ed4-2c167e293965	1 Tick Digit Over 2	Bot de trading baseado em 1 Tick Digit Over 2	1 tick DIgit Over 2.xml	FREE	ACTIVE	2026-02-08 20:16:05.204	2026-02-16 16:13:34.048	1_tick_digit_over_2
 38323f34-4dfb-42d7-8b0c-ec2fc74faa6f	Fast Impar	Bot rápido de Digit Odd (Ímpar) com martingale no Volatility Index 100. Valor de entrada e multiplicador configuráveis.	Fast Impar.xml	PAID	ACTIVE	2026-02-16 21:55:25.326	2026-02-16 21:55:25.326	fast_impar
-8a8b87a9-b872-4d2f-b5a7-d4d22a962861	Moneybot	Bot de Reset Call no Volatility Index 100 com análise de padrões de dígitos pares/ímpares. Martingale configurável com fator e nível de início.	Moneybot.xml	PAID	ACTIVE	2026-02-17 16:44:14.733	2026-02-17 16:44:14.733	moneybot
-be6efbce-c027-4843-bcdc-68fa77babfef	Fabrica Invert	Bot avançado com 10 estratégias invertidas Over/Under no Volatility Index 10. Análise estatística de dígitos, martingale inteligente, soros, stop loss e meta de ganho.	Fabrica Invert.xml	PAID	INACTIVE	2026-02-17 16:22:14.543	2026-02-17 21:09:10.205	fabrica_invert
 92ae4a83-8f71-4262-98b0-cce40b5933c1	Exponential Strategy Bot 2.0	Estratégia exponencial com controle de lucro e perda	Exponential Strategy Bot 2.0.xml	PAID	ACTIVE	2026-02-24 21:31:06.726	2026-02-24 21:31:06.726	exponential_strategy
 aee57e3f-94b2-4852-b28b-3fd65a91b844	Leo Even Odd Bot	Bot para operações Par/Ímpar com martingale	Leo_Even_Odd.xml	PAID	ACTIVE	2026-02-24 21:31:06.799	2026-02-24 21:31:06.799	leo_even_odd
 0eb1f533-55db-4bff-9514-95dae33f05e2	D Alembert Max Stake	D Alembert com stake máximo configurável	dalembert_max-stake.xml	FREE	ACTIVE	2026-02-24 21:31:06.997	2026-02-24 21:31:06.997	dalembert_max_stake
@@ -286,6 +299,16 @@ cd620793-c251-45af-9d19-53cde80504d0	Oscars Grind Max Stake	Oscar Grind com stak
 a85ca0a1-cc08-491f-8b6c-e162594f7cb5	Reverse Martingale	Estratégia Martingale reverso	reverse_martingale.xml	FREE	ACTIVE	2026-02-24 21:31:07.059	2026-02-24 21:31:07.059	reverse_martingale
 bbe8e581-75b9-4f27-87a8-5fab72675a95	Eon Fibonacci	Even/Odd com Fibonacci Martingale - R_50	eon_fibonacci.xml	PAID	ACTIVE	2026-02-26 19:49:16.164	2026-02-26 19:49:16.164	eon_fibonacci
 3bd28b15-e2b1-4168-a32e-a28edea7d245	Eon Paroli	Even/Odd com Anti-Martingale Paroli - R_50	eon_paroli.xml	PAID	ACTIVE	2026-02-26 19:49:16.182	2026-02-26 19:49:16.182	eon_paroli
+\.
+
+
+--
+-- Data for Name: Course; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public."Course" (id, title, description, thumbnail, "order", status, created_at, updated_at) FROM stdin;
+371746dd-fa53-4e6b-a06f-73798852e820	Curso Geral	Módulos e aulas da plataforma	https://augustofreires.com.br/oi.jpeg	0	ACTIVE	2026-03-24 16:14:08.752	2026-03-24 16:24:10.612
+18dab19d-9af4-4610-ac8b-e46a0bd1bf3c	curso 2	\N	https://augustofreires.com.br/3.JPEG	0	ACTIVE	2026-03-24 16:24:46.025	2026-03-24 16:24:46.025
 \.
 
 
@@ -304,9 +327,9 @@ d9e8b34a-e5f3-44a8-8cc8-a84464c5a9db	3e02f141-2fc5-429c-bdd2-0236f4355ab1	titulo
 -- Data for Name: CourseModule; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public."CourseModule" (id, title, description, banner_url, "order", status, created_at, updated_at) FROM stdin;
-20b87496-cbcc-4da8-ae68-76f1e9da144e	Cadastro		\N	0	ACTIVE	2026-02-08 23:02:03.253	2026-02-08 23:02:03.253
-3e02f141-2fc5-429c-bdd2-0236f4355ab1	Titulo modulo 2	descricao modulo 2	\N	2	ACTIVE	2026-02-15 19:59:14.318	2026-02-15 19:59:14.318
+COPY public."CourseModule" (id, title, description, banner_url, "order", status, created_at, updated_at, course_id) FROM stdin;
+20b87496-cbcc-4da8-ae68-76f1e9da144e	Cadastro		\N	0	ACTIVE	2026-02-08 23:02:03.253	2026-02-08 23:02:03.253	371746dd-fa53-4e6b-a06f-73798852e820
+3e02f141-2fc5-429c-bdd2-0236f4355ab1	Titulo modulo 2	descricao modulo 2	\N	2	ACTIVE	2026-02-15 19:59:14.318	2026-02-15 19:59:14.318	371746dd-fa53-4e6b-a06f-73798852e820
 \.
 
 
@@ -315,8 +338,8 @@ COPY public."CourseModule" (id, title, description, banner_url, "order", status,
 --
 
 COPY public."Plan" (id, name, description, price, duration_days, status, created_at, updated_at, is_default, checkout_url) FROM stdin;
-8a2564f8-4ab8-4eed-9852-618abdfbe11d	IAeon Start	sspdosd	0.00	0	ACTIVE	2026-02-08 21:03:26.886	2026-02-13 13:42:31.001	t	\N
-01ef6e4b-c374-4303-928f-f12d48fb6f14	IAeon Pro	descircoio dsodsd s	127.00	0	ACTIVE	2026-02-08 21:18:58.266	2026-03-10 18:16:15.761	f	https://go.perfectpay.com.br/PPU38COI0IB
+8a2564f8-4ab8-4eed-9852-618abdfbe11d	Eon Start	sspdosd	0.00	0	ACTIVE	2026-02-08 21:03:26.886	2026-03-19 20:44:20.283	t	
+01ef6e4b-c374-4303-928f-f12d48fb6f14	Eon Pro	descircoio dsodsd s	127.00	0	ACTIVE	2026-02-08 21:18:58.266	2026-03-19 20:44:28.317	f	https://go.perfectpay.com.br/PPU38COI0IB
 \.
 
 
@@ -331,17 +354,13 @@ e4f29f41-60b9-4bdc-ad14-1afbda1431c8	01ef6e4b-c374-4303-928f-f12d48fb6f14	47eec8
 df61109d-37c9-4ab4-8cf2-d9f9a21f30ff	01ef6e4b-c374-4303-928f-f12d48fb6f14	f27df3a4-7074-4820-883c-d494724efaf8
 9143a50d-82bd-40ac-ae55-5acadd8d1846	01ef6e4b-c374-4303-928f-f12d48fb6f14	f4884da9-89fe-49b8-8d0d-90807722ca1c
 cb1f72f9-f819-48d5-ba92-82ec58d8ac47	8a2564f8-4ab8-4eed-9852-618abdfbe11d	77b438b0-d4c3-43ba-9ed4-2c167e293965
-6f8586c6-090b-45db-839f-320614f1f2d9	01ef6e4b-c374-4303-928f-f12d48fb6f14	8a8b87a9-b872-4d2f-b5a7-d4d22a962861
 caebdcf0-560a-4bb1-bf52-d84bcf3667ca	01ef6e4b-c374-4303-928f-f12d48fb6f14	3b47b5c7-6f26-4148-ac06-2e31db5050a4
-12533c4d-5e82-424a-85ae-caeefdb543a9	01ef6e4b-c374-4303-928f-f12d48fb6f14	be6efbce-c027-4843-bcdc-68fa77babfef
 e69fe413-6207-4b23-b514-4116bb6035d4	01ef6e4b-c374-4303-928f-f12d48fb6f14	1942ef29-fdf0-41d3-baf9-b3c2af780dab
 3410174e-8d2a-4986-ae29-48c1317eddb8	01ef6e4b-c374-4303-928f-f12d48fb6f14	65e0a8bb-4091-4556-825c-a90aed859e02
 f059674c-a624-4513-8d55-59a48699f177	01ef6e4b-c374-4303-928f-f12d48fb6f14	2dd5c9eb-ca9a-4d4c-8a75-34ce111a59e8
 17f32760-74ee-40b6-807b-4ab54d9ddd0a	01ef6e4b-c374-4303-928f-f12d48fb6f14	38323f34-4dfb-42d7-8b0c-ec2fc74faa6f
-448db6b2-2430-4517-94d2-b275fb839958	01ef6e4b-c374-4303-928f-f12d48fb6f14	e59429dc-ad23-4cb7-9c1a-c8b41eecab0c
 4cd03658-8494-4c17-ac74-a510618a736d	01ef6e4b-c374-4303-928f-f12d48fb6f14	b250d063-0df5-4a59-98a4-04add4fda117
 e890d81d-186d-4b26-969b-4f66a36fd094	01ef6e4b-c374-4303-928f-f12d48fb6f14	c44f9311-7ef0-4ac6-9e99-e2592d7e1a6e
-58753248-c3b0-45b4-9bc4-1ed5c22aeed4	01ef6e4b-c374-4303-928f-f12d48fb6f14	0cf11b7d-7ee5-4d3e-a7ab-562b87ea9097
 a1c2ae22-d48f-4c71-9eff-43fd63f50c68	01ef6e4b-c374-4303-928f-f12d48fb6f14	77b438b0-d4c3-43ba-9ed4-2c167e293965
 877be454-4967-4d03-ac8f-672bf92a0a76	01ef6e4b-c374-4303-928f-f12d48fb6f14	92ae4a83-8f71-4262-98b0-cce40b5933c1
 a649aef2-505f-49bb-b6a7-72f7f4c29059	01ef6e4b-c374-4303-928f-f12d48fb6f14	aee57e3f-94b2-4852-b28b-3fd65a91b844
@@ -367,7 +386,6 @@ d25c7f46-e55b-4a4d-b9d6-eb0e10ba731c	banca_data_0c6eb9a0-c4b3-4214-89b5-2ddb4123
 c5dfe763-e240-4e1c-abb8-08c90ca06db3	deriv_affiliate_token	_EDV-zT4Y2G9MjdsyM5hasGNd7ZgqdRLk
 7cf2837b-1296-49e0-b1da-225efe12d049	deriv_signup_url	https://track.deriv.com/_EDV-zT4Y2G9MjdsyM5hasGNd7ZgqdRLk/1/
 3b4c2766-2c9f-4129-8919-c21c0358061c	plan_01ef6e4b-c374-4303-928f-f12d48fb6f14_perfectpay_product	
-14739481-df9f-45a9-a862-abe187ca33f6	banca_data_cf1b1a02-956c-4579-b524-4872d93c9e7a	{"meta_diaria":5,"max_perda":10,"dias":[{"dia":1,"deposito":100},{"dia":2},{"dia":3},{"dia":4},{"dia":5},{"dia":6},{"dia":7},{"dia":8},{"dia":9},{"dia":10},{"dia":11},{"dia":12},{"dia":13},{"dia":14},{"dia":15},{"dia":16},{"dia":17},{"dia":18},{"dia":19},{"dia":20},{"dia":21},{"dia":22},{"dia":23},{"dia":24},{"dia":25},{"dia":26},{"dia":27},{"dia":28},{"dia":29},{"dia":30}]}
 5379b84b-d0f9-4d6d-b59f-aff933aec18d	support_url	
 7bbd9ecf-4cc0-4c4a-b8bf-cb3f38cc438a	primary_color	#00d4aa
 bbe72abc-35c8-42d1-8f59-7e6324f93309	platform_name	Eon Pro
@@ -384,10 +402,13 @@ eb0240b2-c806-4539-90cd-edba3fce2603	meta_pixel_token
 ea2a229c-7e3f-47ee-aa1f-abe1f6526db5	banca_data_5577146c-94da-4a29-b35a-4d1985f4c4f5	{"meta_diaria":5,"max_perda":9,"dias":[{"dia":1},{"dia":2},{"dia":3},{"dia":4},{"dia":5},{"dia":6},{"dia":7},{"dia":8},{"dia":9},{"dia":10},{"dia":11},{"dia":12},{"dia":13},{"dia":14},{"dia":15},{"dia":16},{"dia":17},{"dia":18},{"dia":19},{"dia":20},{"dia":21},{"dia":22},{"dia":23},{"dia":24},{"dia":25},{"dia":26},{"dia":27},{"dia":28},{"dia":29},{"dia":30}]}
 4eabcd4b-383c-4f02-9e72-0b9b1b0a5991	perfectpay_webhook_token	12d52c5cf8c1993fbd5da8252539e645
 c8ae449f-2154-459e-a8b4-b0ae96016fc9	banca_data_f954d0ef-17e0-491a-929b-bc48a04efe0e	{"meta_diaria":5,"max_perda":9,"dias":[{"dia":1},{"dia":2},{"dia":3},{"dia":4},{"dia":5},{"dia":6},{"dia":7},{"dia":8},{"dia":9},{"dia":10},{"dia":11},{"dia":12},{"dia":13},{"dia":14},{"dia":15},{"dia":16},{"dia":17},{"dia":18},{"dia":19},{"dia":20},{"dia":21},{"dia":22},{"dia":23},{"dia":24},{"dia":25},{"dia":26},{"dia":27},{"dia":28},{"dia":29},{"dia":30}]}
-800ad3eb-bdf6-4d4f-9a0a-e8a2f57dbf01	banca_data_32a229ad-7a9a-465e-9629-5c436a3ad664	{"meta_diaria":5,"max_perda":9,"dias":[{"dia":1},{"dia":2},{"dia":3},{"dia":4},{"dia":5},{"dia":6},{"dia":7},{"dia":8},{"dia":9},{"dia":10},{"dia":11},{"dia":12},{"dia":13},{"dia":14},{"dia":15},{"dia":16},{"dia":17},{"dia":18},{"dia":19},{"dia":20},{"dia":21},{"dia":22},{"dia":23},{"dia":24},{"dia":25},{"dia":26},{"dia":27},{"dia":28},{"dia":29},{"dia":30}]}
 5d17f409-5cd4-4e93-82d4-69a5bc201cc8	favicon_url	/faviconeon.png
 215a5897-c649-410e-90b4-9bb52a3edecb	dashboard_banners	[{"id": "1", "title": "Operar Bots", "subtitle": "Acesse seus bots e opere", "image_url": "", "gradient": "linear-gradient(135deg, #0a2a1a 0%, #00d4aa 100%)", "link": "/bot", "order": 1, "active": true}, {"id": "2", "title": "Video-Aulas", "subtitle": "Aprenda a operar", "image_url": "", "gradient": "linear-gradient(135deg, #1a0a2e 0%, #6c3ce0 100%)", "link": "/cursos", "order": 2, "active": true}, {"id": "3", "title": "Escolha seu Plano", "subtitle": "Desbloqueie todos os bots", "image_url": "", "gradient": "linear-gradient(135deg, #2a1a0a 0%, #d4a000 100%)", "link": "/planos", "order": 3, "active": true}, {"id": "4", "title": "Links Uteis", "subtitle": "Telegram, WhatsApp e mais", "image_url": "", "gradient": "linear-gradient(135deg, #0a1a2e 0%, #0088d4 100%)", "link": "/links", "order": 4, "active": true}, {"id": "5", "title": "Meu Perfil", "subtitle": "Gerencie sua conta", "image_url": "", "gradient": "linear-gradient(135deg, #1a0a1a 0%, #d400aa 100%)", "link": "/perfil", "order": 5, "active": true}]
 b9faf510-8090-40c5-a7f9-fd8e1c2fa9a5	logo_url	/eonlogo.png
+14739481-df9f-45a9-a862-abe187ca33f6	banca_data_cf1b1a02-956c-4579-b524-4872d93c9e7a	{"meta_diaria":5,"max_perda":10,"dias":[{"dia":1,"deposito":100},{"dia":2},{"dia":3},{"dia":4},{"dia":5},{"dia":6},{"dia":7},{"dia":8},{"dia":9},{"dia":10},{"dia":11},{"dia":12},{"dia":13},{"dia":14},{"dia":15},{"dia":16},{"dia":17},{"dia":18},{"dia":19},{"dia":20},{"dia":21},{"dia":22},{"dia":23},{"dia":24},{"dia":25},{"dia":26},{"dia":27},{"dia":28},{"dia":29},{"dia":30}]}
+0a902cb9-d4d9-4ad7-acf2-b51c124900ea	deriv_markup_token_2	
+7d5de056-943b-4518-8f6a-c025855716b7	deriv_markup_app_id_2	
+800ad3eb-bdf6-4d4f-9a0a-e8a2f57dbf01	banca_data_32a229ad-7a9a-465e-9629-5c436a3ad664	{"meta_diaria":5,"max_perda":9,"dias":[{"dia":1},{"dia":2},{"dia":3},{"dia":4},{"dia":5},{"dia":6},{"dia":7},{"dia":8},{"dia":9},{"dia":10},{"dia":11},{"dia":12},{"dia":13},{"dia":14},{"dia":15},{"dia":16},{"dia":17},{"dia":18},{"dia":19},{"dia":20},{"dia":21},{"dia":22},{"dia":23},{"dia":24},{"dia":25},{"dia":26},{"dia":27},{"dia":28},{"dia":29},{"dia":30}]}
 \.
 
 
@@ -398,6 +419,8 @@ b9faf510-8090-40c5-a7f9-fd8e1c2fa9a5	logo_url	/eonlogo.png
 COPY public."Subscription" (id, user_id, plan_id, started_at, expires_at, status, payment_source, payment_reference, created_at, updated_at) FROM stdin;
 a0f0ec81-86c8-4090-8851-2ec8e89bb09b	cf1b1a02-956c-4579-b524-4872d93c9e7a	01ef6e4b-c374-4303-928f-f12d48fb6f14	2026-02-16 16:51:32.623	\N	ACTIVE	MANUAL	ADMIN-1771260692621	2026-02-16 16:51:32.623	2026-02-16 16:51:32.623
 31dd28cc-1304-4f6d-be7e-4c58d0a330f6	3f9062a5-7c15-4fff-8e54-5cacd6594f9c	01ef6e4b-c374-4303-928f-f12d48fb6f14	2026-02-20 14:18:06.95	\N	CANCELLED	PERFECTPAY	PPCPMTB5HBBF0K	2026-02-20 14:18:06.952	2026-02-20 14:30:21.476
+f9bf371d-9c7b-4e56-a660-0f0e19eff8c8	f41c44c2-90f1-4a22-8568-5bebc772ebe7	8a2564f8-4ab8-4eed-9852-618abdfbe11d	2026-03-23 16:22:55.464	\N	ACTIVE	MANUAL	\N	2026-03-23 16:22:55.464	2026-03-23 16:22:55.464
+846cae68-6f7c-4d65-b797-2ae8aec55e25	93326cdf-e54d-4d11-a6ac-97d63187bc5f	8a2564f8-4ab8-4eed-9852-618abdfbe11d	2026-03-23 16:28:59.181	\N	ACTIVE	MANUAL	\N	2026-03-23 16:28:59.181	2026-03-23 16:28:59.181
 \.
 
 
@@ -431,6 +454,14 @@ ALTER TABLE ONLY public."CourseLesson"
 
 ALTER TABLE ONLY public."CourseModule"
     ADD CONSTRAINT "CourseModule_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Course Course_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Course"
+    ADD CONSTRAINT "Course_pkey" PRIMARY KEY (id);
 
 
 --
@@ -519,6 +550,14 @@ ALTER TABLE ONLY public."CourseLesson"
 
 
 --
+-- Name: CourseModule CourseModule_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."CourseModule"
+    ADD CONSTRAINT "CourseModule_course_id_fkey" FOREIGN KEY (course_id) REFERENCES public."Course"(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
 -- Name: PlanBot PlanBot_bot_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -554,5 +593,5 @@ ALTER TABLE ONLY public."Subscription"
 -- PostgreSQL database dump complete
 --
 
-\unrestrict gmeQheKaAaxMnkMHYT8Qpim6aUVzWNrNc9Ga2plc4itvZMnL8idkCC2YDekdpxV
+\unrestrict QJmX2Q3iNDmLygWVsIAL6jkgJxhDYd6cRbRFfVuMSK7p5BMlihKbw1xBO3YnZNv
 
