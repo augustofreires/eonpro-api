@@ -84,8 +84,22 @@ model Subscription {
     plan              Plan     @relation(fields: [plan_id], references: [id])
 }
 
+model Course {
+    id          String         @id @default(uuid())
+    title       String
+    description String?
+    thumbnail   String?        // URL da imagem de capa
+    order       Int            @default(0)
+    status      Status         @default(ACTIVE)
+    created_at  DateTime       @default(now())
+    updated_at  DateTime       @updatedAt
+
+    modules     CourseModule[]
+}
+
 model CourseModule {
     id          String   @id @default(uuid())
+    course_id   String?  // nullable para compatibilidade com dados existentes
     title       String
     description String?
     banner_url  String?
@@ -94,6 +108,7 @@ model CourseModule {
     created_at  DateTime @default(now())
     updated_at  DateTime @updatedAt
 
+    course      Course?       @relation(fields: [course_id], references: [id], onDelete: Cascade)
     lessons     CourseLesson[]
 }
 
